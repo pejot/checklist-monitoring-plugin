@@ -1,18 +1,15 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>pl.psnc.dl.wf4ever</groupId>
-  <artifactId>checklist-monitoring-plugin</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>jar</packaging>
-
-  <name>checklist-monitoring-plugin</name>
-  <url>http://maven.apache.org</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>pl.psnc.dl.wf4ever</groupId>
+	<artifactId>checklist-monitoring-plugin</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+	<name>checklist-monitoring-plugin</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<repositories>
 		<repository>
 			<id>maven2-repository.dev.java.net</id>
@@ -32,14 +29,19 @@
 			<url>http://maven.man.poznan.pl/repository/dlibra-libs-snapshots-public/</url>
 		</repository>
 	</repositories>
-  <dependencies>
-    <dependency>
+	<dependencies>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
-    	<dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.9</version>
+		</dependency>
+		<dependency>
 			<groupId>pl.psnc.dl.darceo</groupId>
 			<artifactId>monitoring-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
@@ -59,8 +61,8 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.1.7.Final</version>
 		</dependency>
-  </dependencies>
-  	<build>
+	</dependencies>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -82,10 +84,10 @@
 			</plugin>
 		</plugins>
 	</build>
-  	<scm>
+	<scm>
 		<developerConnection>scm:git:git@github.com:wf4ever/checklist-monitoring-plugin.git</developerConnection>
 	</scm>
-  <distributionManagement>
+	<distributionManagement>
 		<repository>
 			<id>dlibra-releases</id>
 			<url>http://maven.man.poznan.pl/repository/dlibra-libs-releases-public/</url>

@@ -21,4 +21,10 @@ public class ChecklistMonitoringResultTest {
         Assert.assertEquals(title, result.getTitle());
         Assert.assertEquals(description, result.getDescription());
     }
+
+
+    @Test
+    public void testTest() {
+
+    }
 }

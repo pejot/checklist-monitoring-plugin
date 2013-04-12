@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Properties;
 
+import org.hibernate.Session;
 import org.purl.wf4ever.checklist.client.ChecklistEvaluationService;
 import org.purl.wf4ever.checklist.client.EvaluationResult;
 
 import pl.psnc.dl.darceo.monitoring.MonitoringPlugin;
 import pl.psnc.dl.darceo.monitoring.MonitoringResult;
+import pl.psnc.dl.wf4ever.monitoring.db.ChecklistMonitoringData;
 import pl.psnc.dl.wf4ever.monitoring.service.exception.ChecklistMonitoringPluginException;
 
 public class ChecklistMonitoringPlugin implements MonitoringPlugin {
@@ -17,8 +19,8 @@ public class ChecklistMonitoringPlugin implements MonitoringPlugin {
     private URI serviceUri;
     /** The minim definition uri. */
     private URI minimUri;
-
-    private static final String purpouse = "repatable";
+    /** Default checklist request purpose. */
+    private static final String PURPOUSE = "ready-to-release";
 
 
     /**
@@ -37,11 +39,21 @@ public class ChecklistMonitoringPlugin implements MonitoringPlugin {
     }
 
 
+    /**
+     * Plugin execute function.
+     * 
+     * @param objectId
+     *            examined research object id
+     * @return the result of examination in the dArceo readable form
+     */
     public MonitoringResult execute(String objectId) {
         ChecklistEvaluationService service = new ChecklistEvaluationService(serviceUri, minimUri);
-        EvaluationResult evaluationResult = service.evaluate(URI.create(objectId), "ready-to-release");
-
-        return null;
+        EvaluationResult result = service.evaluate(URI.create(objectId), PURPOUSE);
+        Session session = pl.psnc.dl.wf4ever.monitoring.db.HibernateUtil.getSessionFactory().getCurrentSession();
+        //buil new data
+        //save new data
+        ChecklistMonitoringData data = new ChecklistMonitoringData(result);
+        return ChecklistMonitoringResultBuilder.builResult(result);
     }
 
 

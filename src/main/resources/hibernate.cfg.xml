@@ -1,0 +1,21 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+  "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+  <session-factory>
+     <!-- Database connection settings -->
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="connection.url">jdbc:hsqldb:checklist_results</property>
+        <property name="connection.username">admin</property>
+        <property name="connection.password">admin</property>
+        <!-- I hope we don't need it 
+        <property name="connection.pool_size">2</property>
+         -->
+        <property name="dialect">org.hibernate.dialect.HSQLDialect</property>
+        <property name="show_sql">false</property>
+
+        <mapping class="package pl.psnc.dl.wf4ever.monitoring.db.ChecklistMonitoringData" />
+        <mapping class="package pl.psnc.dl.wf4ever.monitoring.db.ChecklistMonitoringDataItem" />
+  </session-factory>
+</hibernate-configuration>

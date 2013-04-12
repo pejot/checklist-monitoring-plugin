@@ -1,5 +1,7 @@
 package pl.psnc.dl.wf4ever.monitoring;
 
+import org.purl.wf4ever.checklist.client.EvaluationResult;
+
 /**
  * Builder for the Checklist Result.
  * 
@@ -19,9 +21,12 @@ public class ChecklistMonitoringResultBuilder {
     /**
      * Build result.
      * 
+     * @param evaluationResult
+     *            the result given by checklist service
+     * 
      * @return result
      */
-    public static ChecklistMonitoringResult builResult() {
+    public static ChecklistMonitoringResult builResult(EvaluationResult evaluationResult) {
         return null;
     }
 }
