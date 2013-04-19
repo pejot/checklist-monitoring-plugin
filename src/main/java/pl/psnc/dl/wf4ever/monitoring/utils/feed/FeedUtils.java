@@ -47,6 +47,6 @@ public final class FeedUtils {
                 }
             }
         }
-        return result.toDate();
+        return (result != null) ? result.toDate() : null;
     }
 }

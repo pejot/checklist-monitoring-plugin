@@ -29,4 +29,12 @@ public class ChecklistMonitoringPluginTest extends BaseTest {
         Assert.assertNotNull(result);
         Assert.assertEquals(result.getData().size(), 2);
     }
+
+
+    @Test
+    public void testExecuteNoReport() {
+        VerificationResult result = checklistMonitoringPlugin.execute("http://www.example.org/rodl/ROs/empty/");
+        Assert.assertNull(result);
+    }
+
 }

@@ -57,7 +57,8 @@ public class ChecklistMonitoringPlugin implements VerificationPlugin {
     public VerificationResult execute(String objectId) {
         SyndFeed feed = rodlNotifcationService.getLastFeed(URI.create(objectId));
         Date from = FeedUtils.getTheFreshestDate(feed.getEntries());
-        feed = stabilityNotificationsService.getFeed(URI.create(objectId), new DateTime(from), null);
+        DateTime dateTimefrom = (from != null) ? new DateTime(from) : null;
+        feed = stabilityNotificationsService.getFeed(URI.create(objectId), dateTimefrom, null);
         return resultBuilder.buildResult(feed);
     }
 }
