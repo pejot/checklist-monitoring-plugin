@@ -1,9 +1,13 @@
-package pl.psnc.dl.wf4ever.monitoring.dependencyinjection;
+package pl.psnc.dl.wf4ever.monitoring;
 
 import java.io.IOException;
 import java.net.URI;
 import java.util.Properties;
 
+import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsService;
+import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsServiceImpl;
+import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateService;
+import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateServiceImpl;
 import pl.psnc.dl.wf4ever.monitoring.service.exception.ChecklistMonitoringPluginException;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsServiceImpl;
@@ -20,9 +24,11 @@ import com.google.inject.name.Names;
 public class GuiceModule extends AbstractModule {
 
     /** The service uri. */
-    private URI serviceUri;
-    /** The minim uti. */
-    private URI minimUri;
+    private URI checlistNotificationsUri;
+    /** The minim uri. */
+    private URI roStateUri;
+    /** The rodl uri. */
+    private URI rodlUri;
 
 
     @Override
@@ -40,13 +46,19 @@ public class GuiceModule extends AbstractModule {
         Properties properties = new Properties();
         try {
             properties.load(getClass().getClassLoader().getResourceAsStream("connection.properties"));
+
         } catch (IOException e) {
             throw new ChecklistMonitoringPluginException("Configuration couldn't be loaded", e);
         }
-        serviceUri = URI.create(properties.getProperty("checklist_uri"));
-        minimUri = URI.create(properties.getProperty("checklist_minim_uri"));
-        bind(URI.class).annotatedWith(Names.named("minimUri")).toInstance(minimUri);
-        bind(URI.class).annotatedWith(Names.named("serviceUri")).toInstance(serviceUri);
+        checlistNotificationsUri = URI.create(properties.getProperty("checklist_notifications_uri"));
+        roStateUri = URI.create(properties.getProperty("ro_state_uri"));
+        rodlUri = URI.create(properties.getProperty("rodl_uri"));
+        bind(URI.class).annotatedWith(Names.named("checklistNotificationUri")).toInstance(checlistNotificationsUri);
+        bind(URI.class).annotatedWith(Names.named("roStateUri")).toInstance(roStateUri);
+        bind(URI.class).annotatedWith(Names.named("rodlUri")).toInstance(rodlUri);
         bind(StabilityNotificationsService.class).to(StabilityNotificationsServiceImpl.class);
+        bind(ROStateService.class).to(ROStateServiceImpl.class);
+        bind(RODLNotificationsService.class).to(RODLNotificationsServiceImpl.class);
+        bind(ChecklistMonitoringResultBuilder.class);
     }
 }

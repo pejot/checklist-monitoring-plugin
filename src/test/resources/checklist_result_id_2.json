@@ -1,0 +1,51 @@
+{ "rouri":                  "http://sandbox.wf4ever-project.org/rodl/ROs/SimpleRO/"
+, "roid":                   "SimpleRO"
+, "title":                  "GWAS to pathway"
+, "description":            "<p>&nbsp;This pack is for a workflow that finds KEGG pathways for genes from a GWAS.</p>"
+, "checklisturi":           "http://sandbox.wf4ever-project.org/rodl/ROs/Y2Demo-test/workflow-experiment-checklist.rdf#experiment_complete_model"
+, "checklisttarget":        "http://sandbox.wf4ever-project.org/rodl/ROs/SimpleRO/"
+, "checklisttargetlabel":   "GWAS to pathway"
+, "checklistpurpose":       "ready-to-release"
+, "evalresult":             "http://purl.org/minim/minim#fullySatisfies"
+, "evalresultlabel":        "fully satisfies"
+, "evalresultclass":        ["pass"]
+, "checklistitems":
+  [
+    { "itemuri":        "http://sandbox.wf4ever-project.org/rodl/ROs/Y2Demo-test/workflow-experiment-checklist.rdf#RO_has_hypothesys"
+    , "itemlabel":      "Experiment hypothesis is present"
+    , "itemlevel":      "http://purl.org/minim/minim#hasShouldRequirement"
+    , "itemsatisfied":  true
+    , "itemclass":      ["pass"]
+    },
+    { "itemuri":        "http://sandbox.wf4ever-project.org/rodl/ROs/Y2Demo-test/workflow-experiment-checklist.rdf#RO_has_sketch"
+    , "itemlabel":      "Workflow design sketch is present"
+    , "itemlevel":      "http://purl.org/minim/minim#hasShouldRequirement"
+    , "itemsatisfied":  true
+    , "itemclass":      ["pass"]
+    },
+    { "itemuri":        "http://sandbox.wf4ever-project.org/rodl/ROs/Y2Demo-test/workflow-experiment-checklist.rdf#WF_accessible"
+    , "itemlabel":      "All workflow definitions are accessible"
+    , "itemlevel":      "http://purl.org/minim/minim#hasMustRequirement"
+    , "itemsatisfied":  true
+    , "itemclass":      ["pass"]
+    },
+    { "itemuri":        "http://sandbox.wf4ever-project.org/rodl/ROs/Y2Demo-test/workflow-experiment-checklist.rdf#WF_services_accessible"
+    , "itemlabel":      "All web services used by workflows are accessible"
+    , "itemlevel":      "http://purl.org/minim/minim#hasMustRequirement"
+    , "itemsatisfied":  false
+    , "itemclass":      ["fail", "may"]
+    },
+    { "itemuri":        "http://sandbox.wf4ever-project.org/rodl/ROs/Y2Demo-test/workflow-experiment-checklist.rdf#RO_has_inputdata"
+    , "itemlabel":      "Input data is present"
+    , "itemlevel":      "http://purl.org/minim/minim#hasMustRequirement"
+    , "itemsatisfied":  false
+    , "itemclass":      ["fail", "must"]
+    },
+    { "itemuri":        "http://sandbox.wf4ever-project.org/rodl/ROs/Y2Demo-test/workflow-experiment-checklist.rdf#RO_has_conclusion"
+    , "itemlabel":      "Experiment conclusions are present"
+    , "itemlevel":      "http://purl.org/minim/minim#hasShouldRequirement"
+    , "itemsatisfied":  false
+    , "itemclass":      ["fail", "should"]
+    }
+  ]
+}

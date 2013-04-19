@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.ISODateTimeFormat;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -23,11 +24,12 @@ import com.sun.syndication.io.XmlReader;
  * @author pejot
  * 
  */
+@Singleton
 public final class StabilityNotificationsServiceImpl implements StabilityNotificationsService {
 
     /** Service uri. */
     @Inject
-    @Named("serviceUri")
+    @Named("checklistNotificationUri")
     private URI serviceUri;
     /** jersay client. */
     private Client client;

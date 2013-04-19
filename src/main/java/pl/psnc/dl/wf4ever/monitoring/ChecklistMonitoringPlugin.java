@@ -7,12 +7,14 @@ import org.joda.time.DateTime;
 
 import pl.psnc.dl.darceo.monitoring.MonitoringPlugin;
 import pl.psnc.dl.darceo.monitoring.MonitoringResult;
-import pl.psnc.dl.wf4ever.monitoring.dependencyinjection.GuiceModule;
+import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsService;
+import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsServiceImpl;
+import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateService;
+import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateServiceImpl;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsServiceImpl;
 
 import com.google.inject.Guice;
-import com.sun.syndication.feed.synd.SyndFeed;
 
 /**
  * Monitoring Plugin implementation.
@@ -22,24 +24,31 @@ import com.sun.syndication.feed.synd.SyndFeed;
  */
 public class ChecklistMonitoringPlugin implements MonitoringPlugin {
 
-    /** The service uri. */
-    private URI serviceUri;
-    /** The minim definition uri. */
-    private URI minimUri;
     /** Stability service. */
-    private StabilityNotificationsService stabilityNotifiationsService;
+    private StabilityNotificationsService stabilityNotificationsService;
+    /** RO states service. */
+    private ROStateService roStateService;
+    /** RODL Notifications service. */
+    private RODLNotificationsService rodlNotifcationService;
+
     /** Default checklist request purpose. */
     private static final String PURPOUSE = "ready-to-release";
     /** Logger. */
     private static final Logger LOGGER = Logger.getLogger(ChecklistMonitoringPlugin.class);
+    /** Result builder. */
+    private ChecklistMonitoringResultBuilder resultBuilder;
 
 
     /**
      * Default constructor.
      */
     public ChecklistMonitoringPlugin() {
-        stabilityNotifiationsService = Guice.createInjector(new GuiceModule()).getInstance(
+        stabilityNotificationsService = Guice.createInjector(new GuiceModule()).getInstance(
             StabilityNotificationsServiceImpl.class);
+        roStateService = Guice.createInjector(new GuiceModule()).getInstance(ROStateServiceImpl.class);
+        rodlNotifcationService = Guice.createInjector(new GuiceModule())
+                .getInstance(RODLNotificationsServiceImpl.class);
+        resultBuilder = Guice.createInjector(new GuiceModule()).getInstance(ChecklistMonitoringResultBuilder.class);
     }
 
 
@@ -54,7 +63,7 @@ public class ChecklistMonitoringPlugin implements MonitoringPlugin {
         //take a from parameter from rodl notification for now set unlimited
         DateTime from = null;
         DateTime to = DateTime.now();
-        SyndFeed feed = stabilityNotifiationsService.getFeed(URI.create(objectId), from, to);
-        return null;
+        stabilityNotificationsService.getFeed(URI.create(objectId), from, to);
+        return resultBuilder.buildResult(stabilityNotificationsService.getFeed(URI.create(objectId), from, to));
     }
 }

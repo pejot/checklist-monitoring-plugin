@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Notifications for all ROs</title>
+  <author>
+    <name>My name is rodl :)</name>
+    <email>rodl@wf4ever.org</email>
+  </author>
+  <id>http://localhost:8082/notifications/?limit=1</id>
+  <updated>2013-04-18T11:38:53Z</updated>
+  <entry>
+    <title>Research Object has been created</title>
+    <link rel="http://purl.org/dc/terms/source" href="." title="Action source/service" />
+    <link rel="http://www.openarchives.org/ore/terms/describes" href="http://localhost:8082/ROs/4ffa1969-22fd-41ea-a81e-2306c0078a75/" title="Description for" />
+    <id>urn:X-rodl:2452</id>
+    <published>2013-04-18T11:38:51Z</published>
+    <summary>&amp;lt;p&amp;gt;A new Research Object has been created.&amp;lt;/p&amp;gt;&amp;lt;p&amp;gt;The Research Object URI is &amp;lt;a href=&amp;quot;http://localhost:8082/ROs/4ffa1969-22fd-41ea-a81e-2306c0078a75/&amp;quot;&amp;gt;http://localhost:8082/ROs/4ffa1969-22fd-41ea-a81e-2306c0078a75/&amp;lt;/a&amp;gt;.&amp;lt;/p&amp;gt;</summary>
+  </entry>
+</feed>
