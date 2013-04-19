@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.junit.Test;
 
+import pl.psnc.dl.wf4ever.monitoring.plugin.ChecklistMonitoringResultBuilder;
+import pl.psnc.dl.wf4ever.monitoring.plugin.GuiceModule;
 
 import com.google.inject.Guice;
 import com.sun.syndication.feed.synd.SyndFeed;

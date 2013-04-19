@@ -1,4 +1,4 @@
-package pl.psnc.dl.wf4ever.monitoring;
+package pl.psnc.dl.wf4ever.monitoring.plugin;
 
 import java.io.IOException;
 import java.net.URI;
@@ -6,8 +6,6 @@ import java.util.Properties;
 
 import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsServiceImpl;
-import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateService;
-import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateServiceImpl;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsServiceImpl;
 
@@ -56,7 +54,6 @@ public class GuiceModule extends AbstractModule {
         bind(URI.class).annotatedWith(Names.named("roStateUri")).toInstance(roStateUri);
         bind(URI.class).annotatedWith(Names.named("rodlUri")).toInstance(rodlUri);
         bind(StabilityNotificationsService.class).to(StabilityNotificationsServiceImpl.class);
-        bind(ROStateService.class).to(ROStateServiceImpl.class);
         bind(RODLNotificationsService.class).to(RODLNotificationsServiceImpl.class);
         bind(ChecklistMonitoringResultBuilder.class);
     }

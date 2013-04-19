@@ -1,4 +1,4 @@
-package pl.psnc.dl.wf4ever.monitoring;
+package pl.psnc.dl.wf4ever.monitoring.plugin;
 
 /**
  * Exception raised by Checklist Service in case of problem with the checklist. Wrapper for some communications errors.

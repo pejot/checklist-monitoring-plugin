@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.google.inject.Guice;
 
 import pl.psnc.dl.wf4ever.monitoring.BaseTest;
-import pl.psnc.dl.wf4ever.monitoring.GuiceModule;
+import pl.psnc.dl.wf4ever.monitoring.plugin.GuiceModule;
 
 public class RODLNotificationsServiceImplTest extends BaseTest {
 

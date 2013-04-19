@@ -15,8 +15,6 @@ import org.junit.Before;
 import com.google.inject.Guice;
 
 import pl.psnc.dl.wf4ever.monitoring.BaseTest;
-import pl.psnc.dl.wf4ever.monitoring.ChecklistMonitoringResultBuilder;
-import pl.psnc.dl.wf4ever.monitoring.GuiceModule;
 
 public class ROStateServiceImplTest extends BaseTest {
 

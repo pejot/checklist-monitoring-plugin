@@ -1,8 +1,7 @@
-package pl.psnc.dl.wf4ever.monitoring;
+package pl.psnc.dl.wf4ever.monitoring.plugin;
 
-import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateService;
+import pl.psnc.synat.wrdz.mdz.plugin.VerificationResult;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sun.syndication.feed.synd.SyndFeed;
 
@@ -16,20 +15,13 @@ import com.sun.syndication.feed.synd.SyndFeed;
 public class ChecklistMonitoringResultBuilder {
 
     /**
-     * Service whick collects history of RO states (checklist evaluation results).
-     */
-    @Inject
-    ROStateService stateService;
-
-
-    /**
      * Build a dArceo-understable messege.
      * 
      * @param feed
      *            given atom feed
      * @return the dArceo-understable message
      */
-    public ChecklistMonitoringResult buildResult(SyndFeed feed) {
+    public VerificationResult buildResult(SyndFeed feed) {
         /*
         for (Object ob : feed.getEntries()) {
             SyndEntry entry = (SyndEntry) ob;
@@ -38,6 +30,6 @@ public class ChecklistMonitoringResultBuilder {
             }
         }
         */
-        return new ChecklistMonitoringResult("title", "description");
+        return new VerificationResult();
     }
 }

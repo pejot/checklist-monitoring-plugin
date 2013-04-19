@@ -1,18 +1,16 @@
-package pl.psnc.dl.wf4ever.monitoring;
+package pl.psnc.dl.wf4ever.monitoring.plugin;
 
 import java.net.URI;
 
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
 
-import pl.psnc.dl.darceo.monitoring.MonitoringPlugin;
-import pl.psnc.dl.darceo.monitoring.MonitoringResult;
 import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsServiceImpl;
-import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateService;
-import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateServiceImpl;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsServiceImpl;
+import pl.psnc.synat.wrdz.mdz.plugin.VerificationPlugin;
+import pl.psnc.synat.wrdz.mdz.plugin.VerificationResult;
 
 import com.google.inject.Guice;
 
@@ -22,12 +20,10 @@ import com.google.inject.Guice;
  * @author pejot
  * 
  */
-public class ChecklistMonitoringPlugin implements MonitoringPlugin {
+public class ChecklistMonitoringPlugin implements VerificationPlugin {
 
     /** Stability service. */
     private StabilityNotificationsService stabilityNotificationsService;
-    /** RO states service. */
-    private ROStateService roStateService;
     /** RODL Notifications service. */
     private RODLNotificationsService rodlNotifcationService;
 
@@ -45,7 +41,6 @@ public class ChecklistMonitoringPlugin implements MonitoringPlugin {
     public ChecklistMonitoringPlugin() {
         stabilityNotificationsService = Guice.createInjector(new GuiceModule()).getInstance(
             StabilityNotificationsServiceImpl.class);
-        roStateService = Guice.createInjector(new GuiceModule()).getInstance(ROStateServiceImpl.class);
         rodlNotifcationService = Guice.createInjector(new GuiceModule())
                 .getInstance(RODLNotificationsServiceImpl.class);
         resultBuilder = Guice.createInjector(new GuiceModule()).getInstance(ChecklistMonitoringResultBuilder.class);
@@ -59,7 +54,7 @@ public class ChecklistMonitoringPlugin implements MonitoringPlugin {
      *            examined research object id
      * @return the result of examination in the dArceo readable form
      */
-    public MonitoringResult execute(String objectId) {
+    public VerificationResult execute(String objectId) {
         //take a from parameter from rodl notification for now set unlimited
         DateTime from = null;
         DateTime to = DateTime.now();

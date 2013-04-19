@@ -10,6 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 
+import pl.psnc.dl.wf4ever.monitoring.plugin.ChecklistMonitoringPluginException;
+
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.sun.jersey.api.client.Client;
 

@@ -5,11 +5,10 @@ import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.inject.Guice;
-
 import pl.psnc.dl.wf4ever.monitoring.BaseTest;
-import pl.psnc.dl.wf4ever.monitoring.GuiceModule;
-import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsServiceImpl;
+import pl.psnc.dl.wf4ever.monitoring.plugin.GuiceModule;
+
+import com.google.inject.Guice;
 
 public class StabilityNotificationsServiceImplTest extends BaseTest {
 
