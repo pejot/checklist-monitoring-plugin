@@ -1,5 +1,6 @@
 package pl.psnc.dl.wf4ever.monitoring.rodlnotifications;
 
+import java.io.IOException;
 import java.net.URI;
 
 import javax.ws.rs.core.UriBuilder;
@@ -13,8 +14,10 @@ import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.shared.JenaException;
 import com.hp.hpl.jena.util.FileManager;
-import com.sun.jersey.api.client.Client;
 import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.FeedException;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 
 /**
  * Implementation of ROStateService.
@@ -43,14 +46,21 @@ public class RODLNotificationsServiceImpl implements RODLNotificationsService {
      * Default Constructor.
      */
     public RODLNotificationsServiceImpl() {
-        //    init();
+
     }
 
 
     @Override
     public SyndFeed getLastFeed(URI researchObjectUri) {
         URI requestedUri = buildUri(researchObjectUri);
-        return null;
+        SyndFeedInput input = new SyndFeedInput();
+        SyndFeed feed = null;
+        try {
+            feed = input.build(new XmlReader(requestedUri.toURL()));
+        } catch (IllegalArgumentException | FeedException | IOException e) {
+            throw new RODLNotificationServiceException("Can't optain a new feed for " + researchObjectUri.toString());
+        }
+        return feed;
     }
 
 

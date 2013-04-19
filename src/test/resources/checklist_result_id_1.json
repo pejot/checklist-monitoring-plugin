@@ -1,4 +1,4 @@
-{ "rouri":                  "http://sandbox.wf4ever-project.org/rodl/ROs/SimpleRO/"
+{ "rouri":                  "http://127.0.0.1:8089/rodl/ROs/SimpleRO/"
 , "roid":                   "SimpleRO"
 , "title":                  "GWAS to pathway"
 , "description":            "<p>&nbsp;This pack is for a workflow that finds KEGG pathways for genes from a GWAS.</p>"

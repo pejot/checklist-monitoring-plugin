@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Notifications for all ROs</title>
+  <author>
+    <name>My name is rodl :)</name>
+    <email>rodl@wf4ever.org</email>
+  </author>
+  <id>http://localhost:8089/notifications/?source=http%3A%2F%2F127.0.0.1%3A8089%2Frodl%2FROs%2FSimpleRO%2F&limit=1</id>
+  <updated>2013-04-18T11:38:53Z</updated>
+</feed>

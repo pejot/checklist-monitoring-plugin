@@ -14,7 +14,6 @@ import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import com.sun.jersey.api.client.Client;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
-import pl.psnc.dl.wf4ever.monitoring.service.exception.ChecklistMonitoringPluginException;
 
 public class BaseTest {
 
@@ -59,17 +58,23 @@ public class BaseTest {
             "stability_service_notification.xml");
         InputStream lastNotificationInput = BaseTest.class.getClassLoader()
                 .getResourceAsStream("last_notification.xml");
+        InputStream emptyNotificationInput = BaseTest.class.getClassLoader().getResourceAsStream(
+            "last_notification_case_empty.xml");
         InputStream checklistResultId1Input = BaseTest.class.getClassLoader().getResourceAsStream(
             "checklist_result_id_1.json");
         InputStream checklistResultId2Input = BaseTest.class.getClassLoader().getResourceAsStream(
             "checklist_result_id_2.json");
         //stabiltyservice
-
         stubFor(get(urlMatching((stabilityServiceInput.toString() + "*").replace(HOST_STRING, ""))).willReturn(
             aResponse().withStatus(200).withBody(IOUtils.toString(stabilityServiceInput))));
+
         //rodl get last notification
-        stubFor(get(urlMatching((rodlUri.toString() + "*notification*").replace(HOST_STRING, ""))).willReturn(
+        stubFor(get(urlMatching((rodlUri.toString() + ".*notifications.*").replace(HOST_STRING, ""))).willReturn(
             aResponse().withStatus(200).withBody(IOUtils.toString(lastNotificationInput))));
+        //rodl get last empty notification
+        stubFor(get(urlMatching((rodlUri.toString() + "notifications.*empty.*").replace(HOST_STRING, ""))).willReturn(
+            aResponse().withStatus(200).withBody(IOUtils.toString(emptyNotificationInput))));
+
         //checklist_result_id1
         stubFor(get(urlMatching((roStateUri.toString() + "*" + "id1" + "*").replace(HOST_STRING, ""))).willReturn(
             aResponse().withStatus(200).withBody(IOUtils.toString(checklistResultId1Input))));
@@ -79,11 +84,16 @@ public class BaseTest {
             aResponse().withStatus(200).withBody(IOUtils.toString(checklistResultId2Input))));
         InputStream notificationSerrviceDescription = BaseTest.class.getClassLoader().getResourceAsStream(
             "rodl_notifications_description.rdf");
+
         //notification service description
         stubFor(get(urlEqualTo(rodlUri.toString().replace(HOST_STRING, ""))).withHeader("Content-Type",
             matching("*rdf*")).willReturn(
             aResponse().withStatus(200).withHeader("Content-Type", "application/rdf+xml")
                     .withBody(IOUtils.toString(notificationSerrviceDescription))));
+
+        Client client = Client.create();
+        System.out.println((rodlUri.toString() + "notifications").replace(HOST_STRING, ""));
+        System.out.println(client.resource("http://127.0.0.1:8089/rodl/notifications/").get(String.class));
 
     }
 }

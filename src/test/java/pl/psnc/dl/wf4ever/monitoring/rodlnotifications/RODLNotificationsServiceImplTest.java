@@ -32,11 +32,17 @@ public class RODLNotificationsServiceImplTest extends BaseTest {
     @Test
     public void testBuildUri() {
         String resultUri = rodlNotificationsService.buildUri(researchObjectUri).toString();
-        //result uri should contain threeparamters
+        //result uri should contain three parameters
         Assert.assertTrue(resultUri.contains("ro"));
         Assert.assertTrue(resultUri.contains("source"));
         Assert.assertTrue(resultUri.contains("limit"));
         Assert.assertFalse(resultUri.contains("from"));
         Assert.assertFalse(resultUri.contains("to"));
+    }
+
+
+    @Test
+    public void testGetLastFeed() {
+        Assert.assertNotNull(rodlNotificationsService.getLastFeed(researchObjectUri).getEntries().size());
     }
 }

@@ -8,7 +8,6 @@ import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsServiceImpl;
 import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateService;
 import pl.psnc.dl.wf4ever.monitoring.rostate.ROStateServiceImpl;
-import pl.psnc.dl.wf4ever.monitoring.service.exception.ChecklistMonitoringPluginException;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsServiceImpl;
 

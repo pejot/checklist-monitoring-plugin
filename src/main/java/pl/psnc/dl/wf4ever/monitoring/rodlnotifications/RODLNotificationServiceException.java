@@ -1,9 +1,9 @@
-package pl.psnc.dl.wf4ever.monitoring.service.exception;
+package pl.psnc.dl.wf4ever.monitoring.rodlnotifications;
 
 /**
  * Exception raised by Checklist Service in case of problem with the checklist. Wrapper for some communications errors.
  */
-public class ChecklistMonitoringPluginException extends RuntimeException {
+public class RODLNotificationServiceException extends RuntimeException {
 
     /** Serialization. */
     private static final long serialVersionUID = 1L;
@@ -17,7 +17,7 @@ public class ChecklistMonitoringPluginException extends RuntimeException {
      * @param cause
      *            cause
      */
-    public ChecklistMonitoringPluginException(String message, Exception cause) {
+    public RODLNotificationServiceException(String message, Exception cause) {
         super(message, cause);
     }
 
@@ -28,7 +28,7 @@ public class ChecklistMonitoringPluginException extends RuntimeException {
      * @param message
      *            massege
      */
-    public ChecklistMonitoringPluginException(String message) {
+    public RODLNotificationServiceException(String message) {
         super(message);
     }
 
