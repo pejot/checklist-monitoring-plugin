@@ -1,7 +1,11 @@
 package pl.psnc.dl.wf4ever.monitoring.stability;
 
 import java.io.IOException;
+import java.net.URI;
 
+import junit.framework.Assert;
+
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +31,8 @@ public class StabilityNotificationsServiceImplTest extends BaseTest {
 
     @Test
     public void testGetFeed() {
-        stabilityNotificationsService.getFeed(null, null, null);
+        DateTime now = DateTime.now();
+        URI researchObjectUri = URI.create("http://www.example.org/rodl/ROs/simpleRO");
+        Assert.assertNotNull((stabilityNotificationsService.getFeed(researchObjectUri, now, null)));
     }
-
 }

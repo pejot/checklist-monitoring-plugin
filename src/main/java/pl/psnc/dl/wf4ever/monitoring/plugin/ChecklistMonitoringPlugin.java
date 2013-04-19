@@ -1,6 +1,7 @@
 package pl.psnc.dl.wf4ever.monitoring.plugin;
 
 import java.net.URI;
+import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.joda.time.DateTime;
@@ -9,10 +10,12 @@ import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.rodlnotifications.RODLNotificationsServiceImpl;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsService;
 import pl.psnc.dl.wf4ever.monitoring.stability.StabilityNotificationsServiceImpl;
+import pl.psnc.dl.wf4ever.monitoring.utils.feed.FeedUtils;
 import pl.psnc.synat.wrdz.mdz.plugin.VerificationPlugin;
 import pl.psnc.synat.wrdz.mdz.plugin.VerificationResult;
 
 import com.google.inject.Guice;
+import com.sun.syndication.feed.synd.SyndFeed;
 
 /**
  * Monitoring Plugin implementation.
@@ -26,9 +29,6 @@ public class ChecklistMonitoringPlugin implements VerificationPlugin {
     private StabilityNotificationsService stabilityNotificationsService;
     /** RODL Notifications service. */
     private RODLNotificationsService rodlNotifcationService;
-
-    /** Default checklist request purpose. */
-    private static final String PURPOUSE = "ready-to-release";
     /** Logger. */
     private static final Logger LOGGER = Logger.getLogger(ChecklistMonitoringPlugin.class);
     /** Result builder. */
@@ -55,10 +55,9 @@ public class ChecklistMonitoringPlugin implements VerificationPlugin {
      * @return the result of examination in the dArceo readable form
      */
     public VerificationResult execute(String objectId) {
-        //take a from parameter from rodl notification for now set unlimited
-        DateTime from = null;
-        DateTime to = DateTime.now();
-        stabilityNotificationsService.getFeed(URI.create(objectId), from, to);
-        return resultBuilder.buildResult(stabilityNotificationsService.getFeed(URI.create(objectId), from, to));
+        SyndFeed feed = rodlNotifcationService.getLastFeed(URI.create(objectId));
+        Date from = FeedUtils.getTheFreshestDate(feed.getEntries());
+        feed = stabilityNotificationsService.getFeed(URI.create(objectId), new DateTime(from), null);
+        return resultBuilder.buildResult(feed);
     }
 }
